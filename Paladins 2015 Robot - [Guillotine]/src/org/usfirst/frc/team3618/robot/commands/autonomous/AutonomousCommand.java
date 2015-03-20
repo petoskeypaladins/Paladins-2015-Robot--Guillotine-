@@ -23,10 +23,11 @@ public class AutonomousCommand extends CommandGroup {
         	addSequential(new AutonLiftCommand(false), 0.25);
     		addSequential(new ClampCommand());
     		addParallel(new MoveToLevelCommand(1));
-    		// THIRD TOTE EVENTUALLY
-    		addSequential(new AutonDriveOrientedCommand(0.75, 90.0, 11.0));
+    		addSequential(new AutonDriveOrientedCommand(0.5, 0.0, 0.0, 90));
+    		addParallel(new ResetGyroCommand());
+    		addSequential(new AutonDriveOrientedCommand(0.8, 0.0, 7.9));
     		addSequential(new UnclampCommand());
-    		addSequential(new AutonDriveOrientedCommand(0.5, 180, 2.0));
+    		addSequential(new AutonDriveOrientedCommand(0.5, 180, 1.0));
     	} else if(selection == 3) {
     		addParallel(new AutonLiftCommand(false), 0.25);
         	// First TOTE
@@ -47,29 +48,29 @@ public class AutonomousCommand extends CommandGroup {
     		addSequential(new UnclampCommand());
     		addSequential(new AutonDriveOrientedCommand(0.75, 180, 0.4));
     	} else if(selection == 4) {
-        	addParallel(new AutonLiftCommand(false), 0.25);
+        	addParallel(new AutonLiftCommand(false), 0.1);
         	// First TOTE
         	addSequential(new ClampCommand());
     		addParallel(new MoveToLevelCommand(2));
     		addSequential(new AutonDriveOrientedCommand(0.5, 90.0, 3.0));
-    		addSequential(new AutonDriveOrientedCommand(0.5, 0.0, 3.85));
-    		addSequential(new AutonDriveOrientedCommand(0.5, -90.0, 3.7));
-    		addSequential(new AutonDriveOrientedCommand(0.5, 0.0, 2.0));
+    		addSequential(new AutonDriveOrientedCommand(0.5, 0.0, 4.5));
+    		addSequential(new AutonDriveOrientedCommand(0.5, -90.0, 3.0));
+    		addSequential(new AutonDriveOrientedCommand(0.5, 0.0, 1.5));
     		addSequential(new TestWaitCommand(), 0.125);
     		addSequential(new UnclampCommand());
     		addSequential(new MoveToLevelCommand(0));
     		// Second TOTE
     		addSequential(new ClampCommand());
     		addParallel(new MoveToLevelCommand(2));
-    		addSequential(new AutonDriveOrientedCommand(0.4, 0.0, 6.5));
+    		addSequential(new AutonDriveOrientedCommand(0.5, 0.0, 6.25));
     		//addSequential(new UnclampCommand());
     		//addSequential(new MoveToLevelCommand(0));
     		
     		// Third tote
-    		addSequential(new AutonDriveOrientedCommand(0.5, 0.0, 0.0, 90));
+    		addSequential(new AutonDriveOrientedCommand(0.6, 0.0, 0.0, 90));
     		addParallel(new ResetGyroCommand());
     		addSequential(new AutonDriveOrientedCommand(0.8, 0.0, 7.9));
-    		addSequential(new TestWaitCommand(), 0.25);
+    		addSequential(new TestWaitCommand(), 0.2);
     		addSequential(new UnclampCommand());
     		addParallel(new MoveToLevelCommand(3));
     		addSequential(new AutonDriveOrientedCommand(0.75, 180, 0.4));

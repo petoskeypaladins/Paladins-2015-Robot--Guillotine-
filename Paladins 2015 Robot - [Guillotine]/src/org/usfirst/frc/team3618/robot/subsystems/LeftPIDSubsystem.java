@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -122,14 +123,19 @@ public class LeftPIDSubsystem extends PIDSubsystem {
     }
     
     public boolean isDeadEncoder(double time) {
-    	int curCount = leftLiftEncoder.get();
-    	if(curCount != lastCount) {
-    		lastTime = time;
-    		lastCount = curCount;
+    	boolean isAuto = SmartDashboard.getBoolean("autonomous");
+    	if(!isAuto) {
+	    	int curCount = leftLiftEncoder.get();
+	    	if(curCount != lastCount) {
+	    		lastTime = time;
+	    		lastCount = curCount;
+	    	}
+	    	if ((time - lastTime) >= 1.0)
+	    		isMyEncoderAwful = true;
+	    	return isMyEncoderAwful;
+    	} else {
+    		return false;
     	}
-    	if ((time - lastTime) >= 1.0)
-    		isMyEncoderAwful = true;
-    	return isMyEncoderAwful;
     }
     
 }

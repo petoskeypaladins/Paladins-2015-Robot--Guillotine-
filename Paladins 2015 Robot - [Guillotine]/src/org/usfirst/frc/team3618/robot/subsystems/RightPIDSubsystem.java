@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -98,18 +99,20 @@ public class RightPIDSubsystem extends PIDSubsystem {
     public boolean onTarget() {
     	if(!isUseless) {
 	    	double error = getSetpoint() - rightLiftEncoder.get();
-	    	
-	    	if(Math.abs(error) <= 0.4*Robot.countsPerInch) {
-	    		return true;
-	    	} else {
-	    		return false;
-	    	}
+		    	if(Math.abs(error) <= 0.4*Robot.countsPerInch) {
+		    		return true;
+		    	} else {
+		    		return false;
+		    	}
+		    	
     	} else {
     		return Robot.leftPIDSubsystem.onTarget();
     	}
     }
     
     public boolean isDeadEncoder(double time) {
+    	boolean isAuto = SmartDashboard.getBoolean("autonomous");
+    	if(!isAuto) {
     	int curCount = rightLiftEncoder.get();
     	if(curCount != lastCount) {
     		lastTime = time;
@@ -119,7 +122,9 @@ public class RightPIDSubsystem extends PIDSubsystem {
     		isMyEncoderAwful = true;
     	return isMyEncoderAwful;
     
-    	
+    	} else {
+    		return false;
+    	}
     }
     
 }

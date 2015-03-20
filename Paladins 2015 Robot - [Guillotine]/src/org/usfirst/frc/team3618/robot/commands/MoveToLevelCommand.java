@@ -11,7 +11,7 @@ public class MoveToLevelCommand extends Command {
 
 	public static double toteHeight = 13.0;
 	//Technically totes are 12.1 inches but 13.0 gives space for error.
-	public static double levelsInches[] = {0.0, 3.0, 18.0, 29.0, 42.0};
+	public static double levelsInches[] = {0.0, 3.0, 14.0, 29.0, 42.0};
 	
 
 	private boolean goUp;
