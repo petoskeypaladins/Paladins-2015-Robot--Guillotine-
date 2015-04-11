@@ -30,8 +30,8 @@ public class RobotMap {
 		//Limit Switches
 	public static int BOTTOM_LEFT_LIMIT = 5;
 	public static int BOTTOM_RIGHT_LIMIT = 4;
-	public static int LAWRENCE_UP_LIMIT = 0;
-	public static int LAWRENCE_DOWN_LIMIT = 0;
+	public static int LAWRENCE_UP_LIMIT = 6;
+	public static int LAWRENCE_DOWN_LIMIT = 7;
 		//Encoders
 	public static int FRONT_LEFT_WHEEL_A =20;
 	public static int FRONT_LEFT_WHEEL_B =19;

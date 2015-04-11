@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3618.robot.commands.autonomous;
 
 import org.usfirst.frc.team3618.robot.commands.ClampCommand;
+import org.usfirst.frc.team3618.robot.commands.LawrenceDownCommand;
 import org.usfirst.frc.team3618.robot.commands.LeftToteArmDownCommand;
 import org.usfirst.frc.team3618.robot.commands.LeftToteArmUpCommand;
 import org.usfirst.frc.team3618.robot.commands.MoveToLevelCommand;
@@ -87,10 +88,12 @@ public class AutonomousCommand extends CommandGroup {
     		addSequential(new ResetGyroCommand());
     		addSequential(new AutonDriveOrientedCommand(0.2, 0.0, .25), 1.0);    	
     		addSequential(new TestWaitCommand(), 0.5);
-    		addSequential(new LeftToteArmUpCommand());
+    		addSequential(new LawrenceDownCommand());
     		addSequential(new TestWaitCommand(), 2.0);
-    		addSequential(new AutonDriveOrientedCommand(0.4, 180.0, 6.5), 5.0);    	
-    		addSequential(new LeftToteArmDownCommand());
+    		addSequential(new AutonDriveOrientedCommand(0.4, 180.0, 6.5), 5.0);   
+    		
+    		
+    	
 //    		addSequential(new AutonLawrenceCommand(0), 1.0);
 //    		addSequential(new AutonZDriveCommand(), 3.0);
 //    		addSequential(new AutonDriveOrientedCommand(0.5, 0.0, 5.0));
@@ -103,9 +106,8 @@ public class AutonomousCommand extends CommandGroup {
     		addSequential(new MoveToLevelCommand(2));
     		addSequential(new MoveToLevelCommand(3));
     	}else if(selection == 7){
-    		addSequential(new AutonDriveOrientedCommand(0.75, 0.0, 10.0), 5.0);
-
+    		addSequential(new AutonDriveOrientedCommand(0.75, 0.0, 10.0), 5.0);    		
     	}
-    		
+        		
     }
 }
