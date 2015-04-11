@@ -28,7 +28,7 @@ public class LeftPIDSubsystem extends PIDSubsystem {
 //	public double upSpeed = 0.385;
 //	public double downSpeed = -0.43;
 	
-	public double upSpeed = 0.97;
+	public double upSpeed = 0.99;
 	public double downSpeed = -1.0;
 	
 	private double lastCount = 0;
@@ -113,12 +113,16 @@ public class LeftPIDSubsystem extends PIDSubsystem {
     
     @Override
     public boolean onTarget() {
-    	double error = getSetpoint() - leftLiftEncoder.get();
-    	
-    	if(Math.abs(error) <= 0.4*Robot.countsPerInch) {
-    		return true;
+    	if(Robot.currentLevel > 1 || SmartDashboard.getBoolean("autonomous")) {
+	    	double error = getSetpoint() - leftLiftEncoder.get();
+	    	
+	    	if(Math.abs(error) <= 0.4*Robot.countsPerInch) {
+	    		return true;
+	    	} else {
+	    		return false;
+	    	}
     	} else {
-    		return false;
+    		return bLimitSwitch.get();
     	}
     }
     

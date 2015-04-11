@@ -66,11 +66,13 @@ public class Robot extends IterativeRobot {
     	
     	
     	autoChooser = new SendableChooser();
-    	autoChooser.addDefault("Drive Forward Only", 1);
+    	autoChooser.addDefault("Near Drive Forward Only", 1);
     	autoChooser.addObject("1 Tote and score", 2);
     	autoChooser.addObject("2 Totes and score", 3);
     	autoChooser.addObject("3 Totes and score", 4);
     	autoChooser.addObject("Lawrence", 5);
+    	autoChooser.addObject("SIT THERE AND CRY", 6);
+    	autoChooser.addObject("Far Drive Forward Only", 7);
     	SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
     }
 	
@@ -152,10 +154,7 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putData("Left Lift", leftPIDSubsystem.getPIDController());
         SmartDashboard.putData("Right  Lift", rightPIDSubsystem.getPIDController());
-        
-        SmartDashboard.putNumber("ShoulderEncoder", Robot.lawrenceSubsystem.shoulderEncoder.get());
-        SmartDashboard.putNumber("Elbow Encoder", Robot.lawrenceSubsystem.elbowEncoder.get());
-        
+              
         SmartDashboard.putBoolean("Awful Left Encoder?", Robot.leftPIDSubsystem.isMyEncoderAwful);
         SmartDashboard.putBoolean("Awful Right Encoder?", Robot.rightPIDSubsystem.isMyEncoderAwful);
         SmartDashboard.putNumber("Gyro Angle", Robot.chassisSubsystem.firstGyro.getAngle());

@@ -5,7 +5,6 @@ import org.usfirst.frc.team3618.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-
 /**
  *
  */
@@ -22,11 +21,31 @@ public class DriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.oi.toggleZAxis.get() == true) {
-    		Robot.chassisSubsystem.DriveMe(Robot.oi.stick, 0.0);
-    	} else {
-    		Robot.chassisSubsystem.DriveMe(Robot.oi.stick);
+    	double x = Robot.oi.stick.getX();
+    	double y = Robot.oi.stick.getY();
+    	double z = Robot.oi.stick.getZ();
+    	double limit = 1.0;
+    	
+    	if(Robot.oi.toggleZAxis.get()) {
+    		z = 0.0;
     	}
+    	if(Robot.oi.toggleYAxis.get()) {
+    		y = 0.0;
+    	}
+    	if(Robot.oi.toggleXAxis.get()) {
+    		x = 0.0;
+    	}
+    	
+    	if(Robot.oi.toggleFirstSpeed.get()) {
+    		// 75% power on all axis
+    		limit = 0.4;
+    	} else if(Robot.oi.toggleSecondSpeed.get()) {
+    		// 25% power on all axis
+    		limit = 0.25;
+    	}
+    	
+    	Robot.chassisSubsystem.DriveMe(x*limit, y*limit, z*limit);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

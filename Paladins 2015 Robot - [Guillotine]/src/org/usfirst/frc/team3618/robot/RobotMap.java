@@ -12,13 +12,11 @@ public class RobotMap {
 	//PWM
 	public static int LEFT_FRONT_DRIVE_MOTOR = 0;
 	public static int LEFT_REAR_DRIVE_MOTOR = 1;
-	public static int LAWRENCE_SHOULDER_MOTOR = 7;
+	public static int LAWRENCE_MOTOR = 7;
 	public static int LEFT_LIFT_MOTOR = 3;
 	public static int RIGHT_REAR_DRIVE_MOTOR = 4;
 	public static int RIGHT_FRONT_DRIVE_MOTOR = 5;
-	public static int RIGHT_LIFT_MOTOR = 6;
-	public static int LAWRENCE_ELBOW_MOTOR = 2;
-	
+	public static int RIGHT_LIFT_MOTOR = 6;	
 		
 	//Solenoids
 		public static int CLAMP_CLOSED =1;
@@ -32,6 +30,8 @@ public class RobotMap {
 		//Limit Switches
 	public static int BOTTOM_LEFT_LIMIT = 5;
 	public static int BOTTOM_RIGHT_LIMIT = 4;
+	public static int LAWRENCE_UP_LIMIT = 0;
+	public static int LAWRENCE_DOWN_LIMIT = 0;
 		//Encoders
 	public static int FRONT_LEFT_WHEEL_A =20;
 	public static int FRONT_LEFT_WHEEL_B =19;
@@ -44,8 +44,6 @@ public class RobotMap {
 	public static int REAR_RIGHT_WHEEL_B = 16;
 	public static int LAWRENCE_SHOULDER_A = 7;
 	public static int LAWRENCE_SHOULDER_B = 6;
-	public static int LAWRENCE_ELBOW_A = 9;
-	public static int LAWRENCE_ELBOW_B = 8;
 	public static int LEFT_LIFT_A = 0;
 	public static int LEFT_LIFT_B = 1;
 	public static int RIGHT_LIFT_A = 3;

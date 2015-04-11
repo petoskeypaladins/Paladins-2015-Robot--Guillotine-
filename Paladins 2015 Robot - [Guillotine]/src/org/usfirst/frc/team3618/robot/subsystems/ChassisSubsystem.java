@@ -70,6 +70,11 @@ public class ChassisSubsystem extends Subsystem {
     	myRobotDrive.mecanumDrive_Cartesian(x,y,z,0); 	
     }
     
+    public void DriveMe(double x, double y, double z) {
+    	double max = 0.75;
+    	myRobotDrive.mecanumDrive_Cartesian(x, y, z*max, 0);
+    }
+    
     public void AutoDrive(double speed, double direction, double angle) {
     	myRobotDrive.mecanumDrive_Polar(speed, direction, -firstGyro.getAngle()*Kp);
     }
@@ -118,6 +123,10 @@ public class ChassisSubsystem extends Subsystem {
  
     public void rotate(double angle, double power) {
     	myRobotDrive.mecanumDrive_Polar(0, 0, power);
+    }
+    
+    public void zDrive(double timer, double powerLimit) {
+    	myRobotDrive.mecanumDrive_Cartesian(0, 0, powerLimit * Math.cos(timer * Math.PI), 0);
     }
     
 }

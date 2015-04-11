@@ -3,6 +3,7 @@ package org.usfirst.frc.team3618.robot.commands;
 import org.usfirst.frc.team3618.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -65,13 +66,20 @@ public class MoveToLevelCommand extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	// If both are on target, or if one is on target and the other has an encoder reading of '0', then consider it finished
-    	if ((Robot.rightPIDSubsystem.onTarget() && Robot.leftPIDSubsystem.onTarget()) 
-    			|| (Robot.leftPIDSubsystem.isDeadEncoder(timeSinceInitialized()))
-    			|| (Robot.rightPIDSubsystem.isDeadEncoder(timeSinceInitialized()))) {
-    		return true;
-    	} else {
-    		return false;
-    	}
+	    if(timeSinceInitialized() <= 1.0  || SmartDashboard.getBoolean("autonomous")) {
+    		if ((Robot.rightPIDSubsystem.onTarget() && Robot.leftPIDSubsystem.onTarget()) 
+	    			|| (Robot.leftPIDSubsystem.isDeadEncoder(timeSinceInitialized()))
+	    			|| (Robot.rightPIDSubsystem.isDeadEncoder(timeSinceInitialized()))) {
+    			SmartDashboard.putString("Lift Running", "WHY");
+	    		return true;
+	    	} else {
+	    		SmartDashboard.putBoolean("Lift Running", false);
+	    		return false;
+	    	}
+	    } else {
+	    	SmartDashboard.putBoolean("Lift Running", true);
+	    	return true;
+	    }
     }
 
     // Called once after isFinished returns true

@@ -25,8 +25,8 @@ public class RightPIDSubsystem extends PIDSubsystem {
 //	public double upSpeed = 0.38;
 //	public double downSpeed = -0.34;
 
-	public double upSpeed = 0.7;
-	public double downSpeed = -0.63;
+	public double upSpeed = 0.99;
+	public double downSpeed = -0.7;
 	
 	public boolean hasReset;
 	public boolean isMyEncoderAwful = true;
@@ -72,7 +72,7 @@ public class RightPIDSubsystem extends PIDSubsystem {
 	    		hasReset = true;
 	    	}
 	    	output = -output; // make 'down' negative
-	    	double MaxOutput = 0.7;
+	    	double MaxOutput = 0.74;
 	    	if (output > MaxOutput)
 	    		output = MaxOutput;
 	    	else if (output < -MaxOutput)
@@ -98,13 +98,16 @@ public class RightPIDSubsystem extends PIDSubsystem {
     @Override
     public boolean onTarget() {
     	if(!isUseless) {
+    		if(Robot.currentLevel > 0 || SmartDashboard.getBoolean("autonomous")) {
 	    	double error = getSetpoint() - rightLiftEncoder.get();
 		    	if(Math.abs(error) <= 0.4*Robot.countsPerInch) {
 		    		return true;
 		    	} else {
 		    		return false;
 		    	}
-		    	
+    		} else {
+    			return bLimitSwitch.get();
+    		}
     	} else {
     		return Robot.leftPIDSubsystem.onTarget();
     	}

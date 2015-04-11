@@ -23,11 +23,17 @@ public class LeftPIDDefaultCommand extends Command {
     protected void execute() {
     	// axis upsidedown
     	if(Robot.oi.DrewsXBoxController.getRawAxis(1) < -0.5)
-    		Robot.leftPIDSubsystem.jog(Robot.leftPIDSubsystem.upSpeed);
-    		//Robot.leftPIDSubsystem.bypassPIDJog(0.5);
+    		if(Robot.oi.DrewsXBoxController.getRawAxis(2) > 0.25) {
+    			Robot.leftPIDSubsystem.jog(Robot.leftPIDSubsystem.upSpeed/2);
+    		} else {
+    			Robot.leftPIDSubsystem.jog(Robot.leftPIDSubsystem.upSpeed);
+    		}
     	else if(Robot.oi.DrewsXBoxController.getRawAxis(1) > 0.5)
-    		Robot.leftPIDSubsystem.jog(Robot.leftPIDSubsystem.downSpeed);
-    		//Robot.leftPIDSubsystem.bypassPIDJog(-0.5);
+    		if(Robot.oi.DrewsXBoxController.getRawAxis(2) > 0.25) {
+    			Robot.leftPIDSubsystem.jog(Robot.leftPIDSubsystem.downSpeed/2);
+    		} else {
+    			Robot.leftPIDSubsystem.jog(Robot.leftPIDSubsystem.downSpeed);
+    		}
     	else Robot.leftPIDSubsystem.stop();
     }
 

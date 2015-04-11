@@ -12,12 +12,22 @@ public class AutonDriveOrientedCommand extends Command {
 	private double driveAngle;
 	private double rotationAngle;
 	private double speed;
+	private boolean accel;
 	
     public AutonDriveOrientedCommand(double speed, double angle, double distance) {
     	this.speed = speed;
     	this.driveAngle = angle;
     	this.distance = distance;
     	this.rotationAngle = 0;
+    	this.accel = true;
+    }
+    
+    public AutonDriveOrientedCommand(double speed, double angle, double distance, boolean accel) {
+    	this.speed = speed;
+    	this.driveAngle = angle;
+    	this.distance = distance;
+    	this.rotationAngle = 0;
+    	this.accel = accel;
     }
     
     public AutonDriveOrientedCommand(double speed, double angle, double distance, double rotationAngle) {
@@ -25,6 +35,7 @@ public class AutonDriveOrientedCommand extends Command {
     	this.driveAngle = angle;
     	this.distance = distance;
     	this.rotationAngle = rotationAngle;
+    	this.accel = true;
     }
     
     // Called just before this Command runs the first time
@@ -35,7 +46,11 @@ public class AutonDriveOrientedCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 		if(rotationAngle == 0) {
-    		Robot.chassisSubsystem.AutoDrive(Robot.chassisSubsystem.accel(speed, timeSinceInitialized(), 0.3), driveAngle, 0);
+			if(accel) {
+	    		Robot.chassisSubsystem.AutoDrive(Robot.chassisSubsystem.accel(speed, timeSinceInitialized(), 0.3), driveAngle, 0);
+			} else {
+	    		Robot.chassisSubsystem.AutoDrive(speed, driveAngle, 0);
+			}
 		} else {
 			Robot.chassisSubsystem.rotate(rotationAngle, speed);
 		}

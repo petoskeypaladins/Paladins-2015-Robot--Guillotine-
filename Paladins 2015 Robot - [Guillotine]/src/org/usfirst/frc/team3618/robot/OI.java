@@ -1,11 +1,11 @@
 package org.usfirst.frc.team3618.robot;
 
 import org.usfirst.frc.team3618.robot.commands.ClampCommand;
-import org.usfirst.frc.team3618.robot.commands.LawrenceDeployCommand;
+import org.usfirst.frc.team3618.robot.commands.LawrenceDownCommand;
+import org.usfirst.frc.team3618.robot.commands.LawrenceUpCommand;
 import org.usfirst.frc.team3618.robot.commands.LeftToteArmDownCommand;
 import org.usfirst.frc.team3618.robot.commands.LeftToteArmUpCommand;
 import org.usfirst.frc.team3618.robot.commands.ResetGyroCommand;
-import org.usfirst.frc.team3618.robot.commands.StowLawrenceCommand;
 import org.usfirst.frc.team3618.robot.commands.UnclampCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -28,12 +28,16 @@ public class OI {
 	public Button leftToteArmUp = new JoystickButton(stick, 2);
 	public Button leftToteArmDown = new JoystickButton(stick, 1);
 	public Button resetGyro = new JoystickButton(stick, 3);
-	public Button shoulderUp = new JoystickButton(DrewsXBoxController,5); // used in LawrenceDefaultCommand
-	public Button shoulderDown = new JoystickButton(DrewsXBoxController,6); // used in LawrenceDefaultCommand
-	public Button deployLawrence = new JoystickButton(DrewsXBoxController,3);
-	public Button stowLawrence = new JoystickButton(DrewsXBoxController, 4);
-	public Button toggleZAxis = new JoystickButton(stick, 11);
-		
+	public Button lawrenceDown = new JoystickButton(DrewsXBoxController,5); // used in LawrenceDefaultCommand
+	public Button lawrenceUp = new JoystickButton(DrewsXBoxController,6); // used in LawrenceDefaultCommand
+	//public Button deployLawrence = new JoystickButton(DrewsXBoxController,3);
+	//public Button stowLawrence = new JoystickButton(DrewsXBoxController, 4);
+	public Button toggleZAxis = new JoystickButton(stick, 9);
+	public Button toggleYAxis = new JoystickButton(stick, 10);
+	public Button toggleXAxis = new JoystickButton(stick, 11);
+	public Button toggleFirstSpeed = new JoystickButton(stick, 12);
+	public Button toggleSecondSpeed = new JoystickButton(stick, 8);
+	
 	// Drew wants stick2, button 2 to be toggle for tote clamping
 	// Drew wants stick2, button 3 to be toggle for tote pushing
 	
@@ -44,8 +48,8 @@ public class OI {
 	//*   2  B                    UnClamp
 	//*   3  X                    Deploy Lawrence
 	//*   4  Y                    Stow Lawrence
-	//*   5  LeftBumper           Shoulder Up (spool)
-	//*   6  RightBumper          Shoulder Down (unspool)
+	//*   5  LeftBumper           Lower Lawrence
+	//*   6  RightBumper          Raise Lawrence
 	//    7  BACK                 
 	//    8  Start                
 	//    9  LeftStickClick
@@ -71,8 +75,11 @@ public OI(){
 	leftToteArmUp.whenPressed(new LeftToteArmUpCommand());
 	leftToteArmDown.whenPressed(new LeftToteArmDownCommand());
 	resetGyro.whenPressed(new ResetGyroCommand());
-	deployLawrence.whenPressed(new LawrenceDeployCommand());
-	stowLawrence.whenPressed(new StowLawrenceCommand());
+	//deployLawrence.whenPressed(new LawrenceDeployCommand());
+	//stowLawrence.whenPressed(new StowLawrenceCommand());
+	lawrenceDown.whileHeld(new LawrenceDownCommand());
+	lawrenceUp.whileHeld(new LawrenceUpCommand());
+	
 }
 	
 	
