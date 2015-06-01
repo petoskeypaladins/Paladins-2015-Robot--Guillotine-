@@ -15,7 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class LeftPIDSubsystem extends PIDSubsystem {
-
+	
+	//Object declarations to use for the robot
+	
 	Talon leftLiftTalon = new Talon(RobotMap.LEFT_LIFT_MOTOR);
 	public Encoder leftLiftEncoder = new Encoder(RobotMap.LEFT_LIFT_A,
 			 RobotMap.LEFT_LIFT_B);
@@ -34,7 +36,7 @@ public class LeftPIDSubsystem extends PIDSubsystem {
 	private double lastCount = 0;
 	private double lastTime = 0.0;
 	
-    // Initialize your subsystem here
+    // Initializing the Subsytem
     public LeftPIDSubsystem() {
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
@@ -111,6 +113,8 @@ public class LeftPIDSubsystem extends PIDSubsystem {
     	}
     }
     
+    //We overrided the method because the onTarget() method provided by FIRST did not do what we expected it to do
+    //The method checks if the encoder count is at the desired value we set it to (e.g. 14 in.)
     @Override
     public boolean onTarget() {
     	if(Robot.currentLevel > 1 || SmartDashboard.getBoolean("autonomous")) {
@@ -126,6 +130,9 @@ public class LeftPIDSubsystem extends PIDSubsystem {
     	}
     }
     
+    //The encoder, for whatever reason, was persistant at providing faulty values, or just not working at all
+    //this would screw up the lift synchronization, causing one lift to continuously go up, so we compromised by 
+    //checking if the encoder is'dead' which is what this method does
     public boolean isDeadEncoder(double time) {
     	boolean isAuto = SmartDashboard.getBoolean("autonomous");
     	if(!isAuto) {
